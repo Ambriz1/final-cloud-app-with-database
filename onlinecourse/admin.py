@@ -29,10 +29,10 @@ class LessonAdmin(admin.ModelAdmin):
 
 
 class QuestionAdmin(admin.ModelAdmin):
-    list_display =['text_question']
+    list_display =['text_question', 'grade']
 
 class ChoiceAdmin(admin.ModelAdmin):
-    list_display = ['choice_text']
+    list_display = ['choice_text', 'is_correct']
 
 
 # <HINT> Register Question and Choice models here
