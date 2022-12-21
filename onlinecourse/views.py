@@ -95,7 +95,6 @@ def enroll(request, course_id):
 
     is_enrolled = check_if_enrolled(user, course)
     if not is_enrolled and user.is_authenticated:
-        # Create an enrollment
         Enrollment.objects.create(user=user, course=course, mode='honor')
         course.total_enrollment += 1
         course.save()
@@ -150,7 +149,7 @@ def show_exam_result(request, course_id, submission_id):
             grade += choice.question_ptr.grade
     context = {}
     context['course'] = course
-    context['grade'] = total_grade
+    context['grade'] = grade
     
     return render(request, 'onlinecourse/exam_result_bootstrap.html', context)
 
