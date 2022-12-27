@@ -99,7 +99,7 @@ class Enrollment(models.Model):
 class Question(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     lesson  = models.ForeignKey(Lesson, on_delete=models.CASCADE)
-    text_question = models.CharField(max_length=300, default="question text" )
+    text_question = models.CharField(max_length=300, default="Enter a question" )
     grade = models.IntegerField(default=0)
     # Used to persist question content for a course
     # Has a One-To-Many (or Many-To-Many if you want to reuse questions) relationship with course
