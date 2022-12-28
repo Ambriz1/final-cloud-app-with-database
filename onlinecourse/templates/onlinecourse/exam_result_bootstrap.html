@@ -53,7 +53,28 @@
         <div class="card-columns-vertical mt-1">
         <h5 class="">Exam results</h5>
             <!--HINT Display exam results-->
-            <p>Your score: {{ grade }} out of 100</p>
+            {% for question in course.question_set.all %}
+           <div class="card mt-1">
+               <div class="card-header"><h5>{{ question.question_text }}</h5></div>
+               <div class="form-group">
+                   {% for choice in question.choice_set.all %}
+                   <div class="form-check">
+                       {% if choice.is_correct and choice in choices %}
+                       <div class="text-success">Correct answer: {{ choice.question_text }}</div>
+                       {% else %}{% if choice.is_correct and not choice in choices %}
+                       <div class="text-warning">Not selected: {{ choice.question_text }}</div>
+                       {% else %}{% if not choice.is_correct and choice in choices %}
+                       <div class="text-danger">Wrong answer: {{ choice.qestion_text }}</div>
+                       {% else %}
+                       <div>{{ choice.question_text }}</div>
+                       {% endif %}
+                       {% endif %}
+                       {% endif %}
+                   </div>
+                   {% endfor %}
+               </div>
+           </div>
+           {% endfor %}
         </div>
     </div>
 </body>

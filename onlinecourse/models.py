@@ -99,7 +99,7 @@ class Enrollment(models.Model):
 class Question(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     lesson  = models.ForeignKey(Lesson, on_delete=models.CASCADE)
-    text_question = models.CharField(max_length=300, default="Enter a question" )
+    question_text = models.CharField(max_length=300, default="Enter a question" )
     grade = models.IntegerField(default=0)
     # Used to persist question content for a course
     # Has a One-To-Many (or Many-To-Many if you want to reuse questions) relationship with course
@@ -118,7 +118,8 @@ class Question(models.Model):
             return True
         else:
            return False
-
+    def __str__(self):
+        return self.question_text
 
 #  <HINT> Create a Choice Model with:
     # Used to persist choice content for a question
@@ -128,7 +129,7 @@ class Question(models.Model):
     # Other fields and methods you would like to design
 class Choice(models.Model):
     text_question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    choice_text = models.CharField(max_length=400, default="text")
+    choice_text = models.CharField(max_length=400, default="enter choice text")
     is_correct = models.BooleanField(default=False)
 
 # <HINT> The submission model
@@ -138,5 +139,4 @@ class Choice(models.Model):
 class Submission(models.Model):
     enrollment = models.ForeignKey(Enrollment, on_delete=models.CASCADE)
     choices = models.ManyToManyField(Choice)
-    pub_date = models.DateTimeField('date published')
-#    Other fields and methods you would like to design
+    #    Other fields and methods you would like to design
