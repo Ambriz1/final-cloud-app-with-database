@@ -98,7 +98,6 @@ class Enrollment(models.Model):
 # <HINT> Create a Question Model with:
 class Question(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    lesson  = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     question_text = models.CharField(max_length=300, default="Enter a question" )
     grade = models.IntegerField(default=0)
     # Used to persist question content for a course
@@ -128,7 +127,7 @@ class Question(models.Model):
     # Indicate if this choice of the question is a correct one or not
     # Other fields and methods you would like to design
 class Choice(models.Model):
-    text_question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=400, default="enter choice text")
     is_correct = models.BooleanField(default=False)
 
